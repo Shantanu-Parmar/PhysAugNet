@@ -1,0 +1,8 @@
+README.md
+setup.py
+physaug/__init__.py
+physaugnet.egg-info/PKG-INFO
+physaugnet.egg-info/SOURCES.txt
+physaugnet.egg-info/dependency_links.txt
+physaugnet.egg-info/requires.txt
+physaugnet.egg-info/top_level.txt
