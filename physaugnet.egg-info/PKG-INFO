@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: physaugnet
-Version: 0.1.1
+Version: 0.4.1
 Summary: PhysAugNet: VQ-VAE and physics-inspired (thermal + grain) augmentation pipeline for metal defect segmentation
 Author: Shantanusinh Parmar
 Requires-Python: >=3.10
