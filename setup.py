@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="physaugnet",
-    version="0.1.1",
+    version="0.4.1",
     author="Shantanusinh Parmar",
     description="PhysAugNet: VQ-VAE and physics-inspired (thermal + grain) augmentation pipeline for metal defect segmentation",
     packages=find_packages(),
