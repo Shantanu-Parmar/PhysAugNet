@@ -1,0 +1,19 @@
+mode: train_vqvae
+vqvae_path: checkpoints/vqvae.pth
+dataset_dir: images/train
+output_dir: outputs/reconstructed
+log_dir: logs
+vqvae:
+  image_size: [128, 128]
+  num_hiddens: 128
+  num_embeddings: 512
+  embedding_dim: 64
+  commitment_cost: 0.25
+  learning_rate: 0.001
+  batch_size: 64
+  num_epochs: 50
+  checkpoint_dir: checkpoints/vqvae
+  save_interval: 5
+  log_interval: 10
+  device: "cuda"
+  num_workers: 4
