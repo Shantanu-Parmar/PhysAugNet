@@ -1,0 +1,143 @@
+\doxysection{train.\+VQVAETrainer Class Reference}
+\hypertarget{classtrain_1_1_v_q_v_a_e_trainer}{}\label{classtrain_1_1_v_q_v_a_e_trainer}\index{train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_a3a3d29424c3c09440e1fbc73064e6efe}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, config)
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_a34ba972c67586631289ebf2a8a0f8d5d}{get\+\_\+dataloader}} (self)
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_a915f9c6f16da6bd5c87ecb74627c34cc}{train}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_ab9bfe46d0164b13fa4c1fe01df98936f}{cfg}} = config
+\item 
+str \mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_aae385d47fb914216902363ee452d30db}{device}} = "{}cuda"{} if torch.\+cuda.\+is\+\_\+available() else "{}cpu"{}
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_ae0b075546c18498b87aa092e22a0ed3b}{logger}} = setup\+\_\+logger("{}vqvae\+\_\+trainer"{}, config\mbox{[}"{}log\+\_\+dir"{}\mbox{]})
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_aa9b70ab17914958358dd95948b30eb3c}{model}} = \mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e}{VQVAE}}().to(self.\+device)
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_a2027952a103bbc6f53d22f443a1d381c}{optimizer}} = torch.\+optim.\+Adam(self.\+model.\+parameters(), lr=lr)
+\item 
+\mbox{\hyperlink{classtrain_1_1_v_q_v_a_e_trainer_a83f22ae4db501627eeca40cf23a7dd31}{criterion}} = torch.\+nn.\+MSELoss()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00008}{8}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_a3a3d29424c3c09440e1fbc73064e6efe}\index{train.VQVAETrainer@{train.VQVAETrainer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_a3a3d29424c3c09440e1fbc73064e6efe} 
+train.\+VQVAETrainer.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00009}{9}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_a34ba972c67586631289ebf2a8a0f8d5d}\index{train.VQVAETrainer@{train.VQVAETrainer}!get\_dataloader@{get\_dataloader}}
+\index{get\_dataloader@{get\_dataloader}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{get\_dataloader()}{get\_dataloader()}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_a34ba972c67586631289ebf2a8a0f8d5d} 
+train.\+VQVAETrainer.\+get\+\_\+dataloader (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00018}{18}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_a915f9c6f16da6bd5c87ecb74627c34cc}\index{train.VQVAETrainer@{train.VQVAETrainer}!train@{train}}
+\index{train@{train}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_a915f9c6f16da6bd5c87ecb74627c34cc} 
+train.\+VQVAETrainer.\+train (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00023}{23}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_ab9bfe46d0164b13fa4c1fe01df98936f}\index{train.VQVAETrainer@{train.VQVAETrainer}!cfg@{cfg}}
+\index{cfg@{cfg}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{cfg}{cfg}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_ab9bfe46d0164b13fa4c1fe01df98936f} 
+train.\+VQVAETrainer.\+cfg = config}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00010}{10}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_a83f22ae4db501627eeca40cf23a7dd31}\index{train.VQVAETrainer@{train.VQVAETrainer}!criterion@{criterion}}
+\index{criterion@{criterion}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{criterion}{criterion}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_a83f22ae4db501627eeca40cf23a7dd31} 
+train.\+VQVAETrainer.\+criterion = torch.\+nn.\+MSELoss()}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00016}{16}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_aae385d47fb914216902363ee452d30db}\index{train.VQVAETrainer@{train.VQVAETrainer}!device@{device}}
+\index{device@{device}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{device}{device}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_aae385d47fb914216902363ee452d30db} 
+str train.\+VQVAETrainer.\+device = "{}cuda"{} if torch.\+cuda.\+is\+\_\+available() else "{}cpu"{}}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00011}{11}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_ae0b075546c18498b87aa092e22a0ed3b}\index{train.VQVAETrainer@{train.VQVAETrainer}!logger@{logger}}
+\index{logger@{logger}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_ae0b075546c18498b87aa092e22a0ed3b} 
+train.\+VQVAETrainer.\+logger = setup\+\_\+logger("{}vqvae\+\_\+trainer"{}, config\mbox{[}"{}log\+\_\+dir"{}\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00012}{12}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_aa9b70ab17914958358dd95948b30eb3c}\index{train.VQVAETrainer@{train.VQVAETrainer}!model@{model}}
+\index{model@{model}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_aa9b70ab17914958358dd95948b30eb3c} 
+train.\+VQVAETrainer.\+model = \mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e}{VQVAE}}().to(self.\+device)}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00013}{13}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+\Hypertarget{classtrain_1_1_v_q_v_a_e_trainer_a2027952a103bbc6f53d22f443a1d381c}\index{train.VQVAETrainer@{train.VQVAETrainer}!optimizer@{optimizer}}
+\index{optimizer@{optimizer}!train.VQVAETrainer@{train.VQVAETrainer}}
+\doxysubsubsection{\texorpdfstring{optimizer}{optimizer}}
+{\footnotesize\ttfamily \label{classtrain_1_1_v_q_v_a_e_trainer_a2027952a103bbc6f53d22f443a1d381c} 
+train.\+VQVAETrainer.\+optimizer = torch.\+optim.\+Adam(self.\+model.\+parameters(), lr=lr)}
+
+
+
+Definition at line \mbox{\hyperlink{train_8py_source_l00015}{15}} of file \mbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+physaug/vqvae/\mbox{\hyperlink{train_8py}{train.\+py}}\end{DoxyCompactItemize}

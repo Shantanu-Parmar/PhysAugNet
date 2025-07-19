@@ -1,0 +1,118 @@
+\doxysection{vqvae.\+VQVAE Class Reference}
+\hypertarget{classvqvae_1_1_v_q_v_a_e}{}\label{classvqvae_1_1_v_q_v_a_e}\index{vqvae.VQVAE@{vqvae.VQVAE}}
+Inheritance diagram for vqvae.\+VQVAE\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classvqvae_1_1_v_q_v_a_e}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a623fde1f1f2f2409471f00f9393c97c6}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, in\+\_\+channels=3, embedding\+\_\+dim=64, num\+\_\+embeddings=512)
+\item 
+\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a02f3f07879bd997140eee18906b6e36a}{forward}} (self, x)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a6c0a7fa2c335fca72c3b844915878d40}{encoder}}
+\item 
+\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a816fa768b2b0976b061af7bfc3fc7784}{vq}} = \mbox{\hyperlink{classvqvae_1_1_vector_quantizer}{Vector\+Quantizer}}(num\+\_\+embeddings, embedding\+\_\+dim)
+\item 
+\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a9247b487e28cb00f3b81e988ad50ce13}{decoder}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{vqvae_8py_source_l00023}{23}} of file \mbox{\hyperlink{vqvae_8py_source}{vqvae.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_a623fde1f1f2f2409471f00f9393c97c6}\index{vqvae.VQVAE@{vqvae.VQVAE}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!vqvae.VQVAE@{vqvae.VQVAE}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classvqvae_1_1_v_q_v_a_e_a623fde1f1f2f2409471f00f9393c97c6} 
+vqvae.\+VQVAE.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{in\+\_\+channels}{ = {\ttfamily 3}, }\item[{}]{embedding\+\_\+dim}{ = {\ttfamily 64}, }\item[{}]{num\+\_\+embeddings}{ = {\ttfamily 512}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vqvae_8py_source_l00024}{24}} of file \mbox{\hyperlink{vqvae_8py_source}{vqvae.\+py}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_a02f3f07879bd997140eee18906b6e36a}\index{vqvae.VQVAE@{vqvae.VQVAE}!forward@{forward}}
+\index{forward@{forward}!vqvae.VQVAE@{vqvae.VQVAE}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classvqvae_1_1_v_q_v_a_e_a02f3f07879bd997140eee18906b6e36a} 
+vqvae.\+VQVAE.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{vqvae_8py_source_l00037}{37}} of file \mbox{\hyperlink{vqvae_8py_source}{vqvae.\+py}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_a9247b487e28cb00f3b81e988ad50ce13}\index{vqvae.VQVAE@{vqvae.VQVAE}!decoder@{decoder}}
+\index{decoder@{decoder}!vqvae.VQVAE@{vqvae.VQVAE}}
+\doxysubsubsection{\texorpdfstring{decoder}{decoder}}
+{\footnotesize\ttfamily \label{classvqvae_1_1_v_q_v_a_e_a9247b487e28cb00f3b81e988ad50ce13} 
+vqvae.\+VQVAE.\+decoder}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.ConvTranspose2d(embedding\_dim,\ 64,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.ConvTranspose2d(64,\ 32,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(32,\ in\_channels,\ 3,\ 1,\ 1),\ nn.Sigmoid(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{vqvae_8py_source_l00031}{31}} of file \mbox{\hyperlink{vqvae_8py_source}{vqvae.\+py}}.
+
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_a6c0a7fa2c335fca72c3b844915878d40}\index{vqvae.VQVAE@{vqvae.VQVAE}!encoder@{encoder}}
+\index{encoder@{encoder}!vqvae.VQVAE@{vqvae.VQVAE}}
+\doxysubsubsection{\texorpdfstring{encoder}{encoder}}
+{\footnotesize\ttfamily \label{classvqvae_1_1_v_q_v_a_e_a6c0a7fa2c335fca72c3b844915878d40} 
+vqvae.\+VQVAE.\+encoder}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(in\_channels,\ 32,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(32,\ embedding\_dim,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{vqvae_8py_source_l00026}{26}} of file \mbox{\hyperlink{vqvae_8py_source}{vqvae.\+py}}.
+
+\Hypertarget{classvqvae_1_1_v_q_v_a_e_a816fa768b2b0976b061af7bfc3fc7784}\index{vqvae.VQVAE@{vqvae.VQVAE}!vq@{vq}}
+\index{vq@{vq}!vqvae.VQVAE@{vqvae.VQVAE}}
+\doxysubsubsection{\texorpdfstring{vq}{vq}}
+{\footnotesize\ttfamily \label{classvqvae_1_1_v_q_v_a_e_a816fa768b2b0976b061af7bfc3fc7784} 
+vqvae.\+VQVAE.\+vq = \mbox{\hyperlink{classvqvae_1_1_vector_quantizer}{Vector\+Quantizer}}(num\+\_\+embeddings, embedding\+\_\+dim)}
+
+
+
+Definition at line \mbox{\hyperlink{vqvae_8py_source_l00030}{30}} of file \mbox{\hyperlink{vqvae_8py_source}{vqvae.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+physaug/vqvae/\mbox{\hyperlink{vqvae_8py}{vqvae.\+py}}\end{DoxyCompactItemize}

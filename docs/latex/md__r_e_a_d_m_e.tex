@@ -1,0 +1,264 @@
+\chapter{🔧 Phys\+Aug\+Net }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{🔧 PhysAugNet@{🔧 PhysAugNet}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+{\bfseries{Phys\+Aug\+Net}} is a research-\/grade Python toolkit designed to enhance {\bfseries{few-\/shot}} or {\bfseries{low-\/data}} industrial defect segmentation tasks by integrating\+:
+
+
+\begin{DoxyItemize}
+\item 🌐 {\bfseries{Vector-\/\+Quantized Variational Autoencoding (VQ-\/\+VAE)}} for {\bfseries{generative reconstructions}}
+\item 🔥 {\bfseries{Physically-\/inspired augmentations}} including {\bfseries{thermal distortion}} and {\bfseries{sensor grain noise}}
+\end{DoxyItemize}
+
+This augmentation pipeline improves generalization and robustness of deep segmentation models in {\bfseries{industrial inspection}} workflows.
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{🚀 Key Features}{🚀 Key Features}}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyItemize}
+\item ✅ {\bfseries{Compact and efficient VQ-\/\+VAE}} architecture with fast convergence ~\newline
+
+\item ✅ Dual-\/mode augmentation\+: {\bfseries{thermal distortion}} + {\bfseries{sensor grain noise}} ~\newline
+
+\item ✅ {\bfseries{Phys\+Aug\+Net Fusion}}\+: Combines VQ-\/\+VAE reconstructions with physics-\/inspired augmentations ~\newline
+
+\item ✅ CLI-\/based experiment control via {\bfseries{YAML configuration}} ~\newline
+
+\item ✅ Fully {\bfseries{modular}} and easy to plug into Py\+Torch pipelines ~\newline
+
+\item ✅ Lightweight design tailored for {\bfseries{few-\/shot learning}} and {\bfseries{resource-\/constrained environments}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{🧩 Computational Pipeline}{🧩 Computational Pipeline}}\label{md__r_e_a_d_m_e_autotoc_md4}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Module  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Operation  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Module  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Operation  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }\\\cline{1-3}
+\endhead
+{\ttfamily \doxylink{train_8py}{physaug/vqvae/train.\+py}}  &Training  &Trains VQ-\/\+VAE to learn latent quantized space  \\\cline{1-3}
+{\ttfamily \doxylink{infer_8py}{physaug/vqvae/infer.\+py}}  &Inference  &Reconstructs defect images for augmentation  \\\cline{1-3}
+{\ttfamily \doxylink{thermal_8py}{physaug/augment/thermal.\+py}}  &Augmentation  &Applies thermal distortion to images  \\\cline{1-3}
+{\ttfamily \doxylink{grain_8py}{physaug/augment/grain.\+py}}  &Augmentation  &Applies synthetic sensor grain noise  \\\cline{1-3}
+{\ttfamily \doxylink{combined_8py}{physaug/augment/combined.\+py}}  &Augmentation  &Fuses VQ-\/\+VAE reconstructions with thermal + grain noise  \\\cline{1-3}
+{\ttfamily infer\+\_\+video.\+py}  &Video Inference  &Performs VQ-\/\+VAE reconstructions on video frames  \\\cline{1-3}
+{\ttfamily \doxylink{main_8py}{main.\+py}}  &CLI Launcher  &Unified command-\/line interface with {\ttfamily argparse} routing  \\\cline{1-3}
+{\ttfamily configs/default.\+yaml}  &Config  &Centralized configuration for all training and inference tasks  \\\cline{1-3}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysection{\texorpdfstring{🗂 Project Structure}{🗂 Project Structure}}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{PhysAugNet/}
+\DoxyCodeLine{├──\ physaug/}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ vqvae/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ vqvae.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ train.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ infer.py}
+\DoxyCodeLine{│\ \ \ ├──\ augment/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ thermal.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ grain.py}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ combined.py}
+\DoxyCodeLine{│\ \ \ └──\ utils/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ config.py}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ io.py}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ logger.py}
+\DoxyCodeLine{├──\ configs/}
+\DoxyCodeLine{│\ \ \ └──\ default.yaml}
+\DoxyCodeLine{├──\ examples/}
+\DoxyCodeLine{│\ \ \ └──\ notebook\_demo.ipynb}
+\DoxyCodeLine{├──\ physaugnet.egg-\/info/}
+\DoxyCodeLine{├──\ main.py}
+\DoxyCodeLine{├──\ train\_vqvae.py}
+\DoxyCodeLine{├──\ gen\_vqvae.py}
+\DoxyCodeLine{├──\ augment\_thermal.py}
+\DoxyCodeLine{├──\ augment\_combined.py}
+\DoxyCodeLine{├──\ infer\_video.py}
+\DoxyCodeLine{├──\ setup.py}
+\DoxyCodeLine{├──\ requirements.txt}
+\DoxyCodeLine{└──\ README.md}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{📦 Installation}{📦 Installation}}\label{md__r_e_a_d_m_e_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{Option 1\+: Install from Py\+PI (Recommended)}{Option 1\+: Install from Py\+PI (Recommended)}}\label{md__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip\ install\ physaugnet}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{Option 2\+: Clone the Repository}{Option 2\+: Clone the Repository}}\label{md__r_e_a_d_m_e_autotoc_md10}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/Shantanu-\/Parmar/PhysAugNet}
+\DoxyCodeLine{cd\ PhysAugNet}
+
+\end{DoxyCode}
+
+
+Create a virtual environment\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Linux/Mac}
+\DoxyCodeLine{python\ -\/m\ venv\ Physaug}
+\DoxyCodeLine{source\ Physaug/bin/activate}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Windows}
+\DoxyCodeLine{python\ -\/m\ venv\ Physaug}
+\DoxyCodeLine{Physaug\(\backslash\)Scripts\(\backslash\)activate}
+
+\end{DoxyCode}
+
+
+Install dependencies\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip\ install\ -\/r\ requirements.txt}
+
+\end{DoxyCode}
+
+
+Or install the package\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ setup.py\ install}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{\texorpdfstring{⚙️ Setup}{⚙️ Setup}}\label{md__r_e_a_d_m_e_autotoc_md12}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsection{\texorpdfstring{📁 Dataset Preparation}{📁 Dataset Preparation}}\label{md__r_e_a_d_m_e_autotoc_md13}
+
+\begin{DoxyItemize}
+\item Place {\bfseries{training images}} under\+: ~\newline
+ {\ttfamily images/train/\texorpdfstring{$<$}{<}class\+\_\+name\texorpdfstring{$>$}{>}/}
+\item Place {\bfseries{test images}} under\+: ~\newline
+ {\ttfamily images/test/}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsection{\texorpdfstring{📁 Directory Creation}{📁 Directory Creation}}\label{md__r_e_a_d_m_e_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ -\/p\ checkpoints/vqvae\ outputs/reconstructed\ outputs/augmented\ outputs/combined\ logs}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysubsection{\texorpdfstring{🛠 Config File}{🛠 Config File}}\label{md__r_e_a_d_m_e_autotoc_md15}
+Edit {\ttfamily configs/default.\+yaml} to ensure all paths and parameters are correctly set for your environment.
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysection{\texorpdfstring{🖥 Usage}{🖥 Usage}}\label{md__r_e_a_d_m_e_autotoc_md17}
+Run from the root {\ttfamily Phys\+Aug\+Net/} directory using CLI\+:\hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysubsection{\texorpdfstring{🔧 VQ-\/\+VAE Training}{🔧 VQ-\/\+VAE Training}}\label{md__r_e_a_d_m_e_autotoc_md18}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ -\/m\ physaug.main\ train\_vqvae\ -\/-\/config\ configs/default.yaml}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysubsection{\texorpdfstring{🧠 Image Reconstruction (VQ-\/\+VAE)}{🧠 Image Reconstruction (VQ-\/\+VAE)}}\label{md__r_e_a_d_m_e_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ -\/m\ physaug.main\ reconstruct\ -\/-\/config\ configs/default.yaml}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysubsection{\texorpdfstring{🌡 Thermal + Grain Augmentation}{🌡 Thermal + Grain Augmentation}}\label{md__r_e_a_d_m_e_autotoc_md20}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ -\/m\ physaug.main\ augment\_tg\ -\/-\/config\ configs/default.yaml}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysubsection{\texorpdfstring{🔁 Combined VQ-\/\+VAE + Physical Augmentations}{🔁 Combined VQ-\/\+VAE + Physical Augmentations}}\label{md__r_e_a_d_m_e_autotoc_md21}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ -\/m\ physaug.main\ augment\_combined\ -\/-\/config\ configs/default.yaml}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysubsection{\texorpdfstring{🎞 Video Frame Reconstruction (VQ-\/\+VAE)}{🎞 Video Frame Reconstruction (VQ-\/\+VAE)}}\label{md__r_e_a_d_m_e_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ infer\_video.py\ \ \ -\/-\/video\_path\ images/DEMO\_INFERENCE.mp4\ \ \ -\/-\/output\_path\ outputs/reconstructed\_video.mp4\ \ \ -\/-\/checkpoint\ checkpoints/vqvae.pth\ \ \ -\/-\/config\ configs/default.yaml}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md24}{}\doxysection{\texorpdfstring{📓 Notebook Demonstration}{📓 Notebook Demonstration}}\label{md__r_e_a_d_m_e_autotoc_md24}
+Open the demo notebook to\+:
+
+
+\begin{DoxyItemize}
+\item Train the VQ-\/\+VAE
+\item Reconstruct images
+\item Apply augmentations
+\item Combine and visualize outputs
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{jupyter\ notebook\ examples/notebook\_demo.ipynb}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md26}{}\doxysection{\texorpdfstring{📤 Output Structure}{📤 Output Structure}}\label{md__r_e_a_d_m_e_autotoc_md26}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Type  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Path  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Type  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Path  }\\\cline{1-2}
+\endhead
+Logs  &{\ttfamily logs/} (e.\+g., {\ttfamily vqvae\+\_\+trainer.\+log})  \\\cline{1-2}
+Checkpoints  &{\ttfamily checkpoints/vqvae/}  \\\cline{1-2}
+Reconstructed Images  &{\ttfamily outputs/reconstructed/}  \\\cline{1-2}
+Augmented Images  &{\ttfamily outputs/augmented/}  \\\cline{1-2}
+Combined Outputs  &{\ttfamily outputs/combined/}  \\\cline{1-2}
+Video Outputs  &{\ttfamily outputs/reconstructed\+\_\+video.\+mp4}  \\\cline{1-2}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md28}{}\doxysection{\texorpdfstring{🧪 Applications}{🧪 Applications}}\label{md__r_e_a_d_m_e_autotoc_md28}
+
+\begin{DoxyItemize}
+\item Few-\/shot segmentation in manufacturing
+\item Synthetic data generation for metal defect detection
+\item Robustness to physical variations in sensor input
+\item Domain adaptation for industrial computer vision
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md30}{}\doxysection{\texorpdfstring{📚 Citation}{📚 Citation}}\label{md__r_e_a_d_m_e_autotoc_md30}
+If you use Phys\+Aug\+Net in your research, please cite\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@misc\{parmar2025physaugnet,}
+\DoxyCodeLine{\ \ author\ \ \ \ \ \ \ =\ \{Shantanu\ Parmar\},}
+\DoxyCodeLine{\ \ title\ \ \ \ \ \ \ \ =\ \{PhysAugNet:\ VQ-\/VAE\ and\ Physically-\/Inspired\ Augmentations\ for\ Metal\ Defect\ Segmentation\},}
+\DoxyCodeLine{\ \ year\ \ \ \ \ \ \ \ \ =\ \{2025\},}
+\DoxyCodeLine{\ \ howpublished\ =\ \{\(\backslash\)url\{https://github.com/Shantanu-\/Parmar/PhysAugNet\}\},}
+\DoxyCodeLine{\ \ note\ \ \ \ \ \ \ \ \ =\ \{GitHub\ repository\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md32}{}\doxysection{\texorpdfstring{📄 License}{📄 License}}\label{md__r_e_a_d_m_e_autotoc_md32}
+{\bfseries{MIT License}} — You are free to use, modify, and distribute this software with proper attribution.
+
+© 2025 Shantanu Parmar. All rights reserved. 

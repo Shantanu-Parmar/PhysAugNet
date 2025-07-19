@@ -1,0 +1,40 @@
+\doxysection{main.\+py}
+\hypertarget{main_8py_source}{}\label{main_8py_source}\mbox{\hyperlink{main_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00001}\mbox{\hyperlink{namespacemain}{00001}}\ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00002}00002\ \textcolor{keyword}{from}\ physaug.vqvae.train\ \textcolor{keyword}{import}\ VQVAETrainer}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00003}00003\ \textcolor{keyword}{from}\ physaug.vqvae.infer\ \textcolor{keyword}{import}\ reconstruct\_folder}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00004}00004\ \textcolor{keyword}{from}\ physaug.augment.thermal\ \textcolor{keyword}{import}\ apply\_thermal\_augmentation}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00005}00005\ \textcolor{keyword}{from}\ physaug.augment.combined\ \textcolor{keyword}{import}\ apply\_combined\_augmentation}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00006}00006\ \textcolor{keyword}{from}\ physaug.utils.config\ \textcolor{keyword}{import}\ load\_config}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00007}00007\ \textcolor{keyword}{from}\ physaug.utils.io\ \textcolor{keyword}{import}\ load\_image\_folder,\ save\_image}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00008}00008\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ setup\_logger}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00010}\mbox{\hyperlink{namespacemain_a3140e9a5b6a71ffbf498198cfc471b88}{00010}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemain_a3140e9a5b6a71ffbf498198cfc471b88}{main}}():}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00011}00011\ \ \ \ \ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{"{}PhysAugNet\ CLI"{}})}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00012}00012\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}mode"{}},\ choices=[\textcolor{stringliteral}{"{}train\_vqvae"{}},\ \textcolor{stringliteral}{"{}reconstruct"{}},\ \textcolor{stringliteral}{"{}augment\_tg"{}},\ \textcolor{stringliteral}{"{}augment\_combined"{}}])}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00013}00013\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/config"{}},\ type=str,\ default=\textcolor{stringliteral}{"{}configs/default.yaml"{}})}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00014}00014\ \ \ \ \ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00015}00015\ \ \ \ \ cfg\ =\ load\_config(args.config)}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00016}00016\ \ \ \ \ logger\ =\ setup\_logger(\textcolor{stringliteral}{"{}main"{}},\ cfg[\textcolor{stringliteral}{"{}log\_dir"{}}])}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{if}\ args.mode\ ==\ \textcolor{stringliteral}{"{}train\_vqvae"{}}:}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ trainer\ =\ VQVAETrainer(cfg)}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ trainer.train()}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{elif}\ args.mode\ ==\ \textcolor{stringliteral}{"{}reconstruct"{}}:}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ reconstruct\_folder(cfg[\textcolor{stringliteral}{"{}input\_dir"{}}],\ cfg[\textcolor{stringliteral}{"{}output\_dir"{}}],\ cfg[\textcolor{stringliteral}{"{}vqvae\_path"{}}],\ cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}])}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Reconstructed\ images\ saved\ to\ \{cfg['output\_dir']\}"{}})}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{elif}\ args.mode\ ==\ \textcolor{stringliteral}{"{}augment\_tg"{}}:}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ images,\ names\ =\ load\_image\_folder(cfg[\textcolor{stringliteral}{"{}input\_dir"{}}])}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ img,\ name\ \textcolor{keywordflow}{in}\ zip(images,\ names):}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ aug\_img\ =\ apply\_thermal\_augmentation(img)}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ save\_image(aug\_img,\ f\textcolor{stringliteral}{"{}\{cfg['output\_dir']\}/\{name\}"{}})}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Thermal\ augmentations\ saved\ to\ \{cfg['output\_dir']\}"{}})}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{elif}\ args.mode\ ==\ \textcolor{stringliteral}{"{}augment\_combined"{}}:}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ apply\_combined\_augmentation(cfg[\textcolor{stringliteral}{"{}input\_dir"{}}],\ cfg[\textcolor{stringliteral}{"{}output\_dir"{}}],\ cfg[\textcolor{stringliteral}{"{}vqvae\_path"{}}])}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Combined\ augmentations\ saved\ to\ \{cfg['output\_dir']\}"{}})}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00034}00034\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{main_8py_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{namespacemain}{main}}()}
+
+\end{DoxyCode}

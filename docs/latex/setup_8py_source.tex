@@ -1,0 +1,81 @@
+\doxysection{setup.\+py}
+\hypertarget{setup_8py_source}{}\label{setup_8py_source}\mbox{\hyperlink{setup_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00001}\mbox{\hyperlink{namespacesetup}{00001}}\ \textcolor{keyword}{from}\ setuptools\ \textcolor{keyword}{import}\ setup,\ find\_packages}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00003}00003\ \mbox{\hyperlink{namespacesetup}{setup}}(}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00004}\mbox{\hyperlink{namespacesetup_ab3a7a0638d76a01367c5bc3cc699447f}{00004}}\ \ \ \ \ name=\textcolor{stringliteral}{"{}physaugnet"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00005}\mbox{\hyperlink{namespacesetup_a2aa722b36a933088812b50ea79b97a5c}{00005}}\ \ \ \ \ version=\textcolor{stringliteral}{"{}0.1.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00006}\mbox{\hyperlink{namespacesetup_a3a57a4772d418a06835249cbade0d86a}{00006}}\ \ \ \ \ author=\textcolor{stringliteral}{"{}Shantanusinh\ Parmar"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00007}\mbox{\hyperlink{namespacesetup_aedf461ec52a946bda975938ba0b93ec0}{00007}}\ \ \ \ \ description=\textcolor{stringliteral}{"{}PhysAugNet:\ VQ-\/VAE\ and\ physics-\/inspired\ (thermal\ +\ grain)\ augmentation\ pipeline\ for\ metal\ defect\ segmentation"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00008}\mbox{\hyperlink{namespacesetup_aff2375a361fd5865c77bd9aa093be747}{00008}}\ \ \ \ \ packages=find\_packages(),}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00009}\mbox{\hyperlink{namespacesetup_abead4f26b530856f858f0d44c7cf2588}{00009}}\ \ \ \ \ install\_requires=[}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00010}00010\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}absl-\/py==2.3.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}addict==2.4.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basicsr==1.4.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}certifi==2025.7.9"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}charset-\/normalizer==3.4.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}contourpy==1.3.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cycler==0.12.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}debugpy==1.8.13"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}facexlib==0.3.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}filelock==3.13.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}filterpy==1.4.5"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fonttools==4.58.5"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fsspec==2024.6.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}future==1.0.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}gfpgan==1.3.8"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}grpcio==1.73.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}idna==3.10"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}imageio==2.37.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ipykernel==6.29.5"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Jinja2==3.1.4"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}joblib==1.5.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}jupyter\_client==8.6.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}kiwisolver==1.4.8"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}lazy\_loader==0.4"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}llvmlite==0.44.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}lmdb==1.7.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Markdown==3.8.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MarkupSafe==2.1.5"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}matplotlib==3.10.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mpmath==1.3.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}networkx==3.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}numba==0.61.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}numpy==1.24.4"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}opencv-\/python==4.11.0.86"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}packaging==25.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}pillow==11.0.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}platformdirs==4.3.8"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}protobuf==6.31.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}pyparsing==3.2.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}python-\/dateutil==2.9.0.post0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}PyYAML==6.0.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}pyzmq==26.2.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}realesrgan==0.3.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}requests==2.32.4"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}scikit-\/image==0.25.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}scikit-\/learn==1.7.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}scipy==1.15.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}six==1.17.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}sympy==1.13.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tb-\/nightly==2.20.0a20250711"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tensorboard==2.19.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tensorboard-\/data-\/server==0.7.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}threadpoolctl==3.6.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tifffile==2025.5.10"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tomli==2.2.1"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}torch==2.7.1+cu126"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}torchaudio==2.7.1+cu126"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}torchvision==0.22.1+cu126"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tornado==6.4.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tqdm==4.32.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}typing\_extensions==4.12.2"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}urllib3==2.5.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Werkzeug==3.1.3"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}yapf==0.43.0"{}},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00074}00074\ \ \ \ \ ],}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00075}\mbox{\hyperlink{namespacesetup_aa7ca7bc9391b217e81efeb03689d8dbf}{00075}}\ \ \ \ \ python\_requires=\textcolor{stringliteral}{'>=3.10'},}
+\DoxyCodeLine{\Hypertarget{setup_8py_source_l00076}00076\ )}
+
+\end{DoxyCode}

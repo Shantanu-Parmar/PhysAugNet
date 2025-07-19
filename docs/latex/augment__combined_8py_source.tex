@@ -1,0 +1,42 @@
+\doxysection{augment\+\_\+combined.\+py}
+\hypertarget{augment__combined_8py_source}{}\label{augment__combined_8py_source}\mbox{\hyperlink{augment__combined_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00001}\mbox{\hyperlink{namespaceaugment__combined}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00002}00002\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00003}00003\ \textcolor{keyword}{from}\ physaug.vqvae.vqvae\ \textcolor{keyword}{import}\ VQVAE}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00004}00004\ \textcolor{keyword}{from}\ physaug.augment.thermal\ \textcolor{keyword}{import}\ apply\_thermal\_augmentation}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00005}00005\ \textcolor{keyword}{from}\ physaug.augment.grain\ \textcolor{keyword}{import}\ add\_grain}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00006}00006\ \textcolor{keyword}{from}\ physaug.utils.io\ \textcolor{keyword}{import}\ load\_image\_folder,\ save\_image}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00007}00007\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ setup\_logger}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00008}00008\ \textcolor{keyword}{from}\ physaug.utils.config\ \textcolor{keyword}{import}\ load\_config}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00010}\mbox{\hyperlink{namespaceaugment__combined_a0d4a622e476060c22a9defd64c1b55f5}{00010}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemain}{main}}(input\_dir,\ output\_dir,\ checkpoint,\ config\_path="{}configs/default.yaml"{}):}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00011}00011\ \ \ \ \ cfg\ =\ load\_config(config\_path)}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00012}00012\ \ \ \ \ logger\ =\ setup\_logger(\textcolor{stringliteral}{"{}augment\_combined"{}},\ cfg[\textcolor{stringliteral}{"{}log\_dir"{}}])}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00013}00013\ \ \ \ \ device\ =\ \textcolor{stringliteral}{"{}cuda"{}}\ \textcolor{keywordflow}{if}\ torch.cuda.is\_available()\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}cpu"{}}}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00014}00014\ \ \ \ \ model\ =\ VQVAE().to(device)}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00015}00015\ \ \ \ \ model.load\_state\_dict(torch.load(checkpoint,\ map\_location=device))}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00016}00016\ \ \ \ \ model.eval()}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00017}00017\ \ \ \ \ os.makedirs(output\_dir,\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00018}00018\ \ \ \ \ images,\ names\ =\ load\_image\_folder(input\_dir,\ cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}])}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{for}\ img,\ name\ \textcolor{keywordflow}{in}\ zip(images,\ names):}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ img\ =\ img.unsqueeze(0).to(device)}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad():}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ recon,\ \_,\ \_\ =\ \mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{model}}(img)}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ recon\ =\ recon.squeeze(0).cpu()}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ aug\ =\ apply\_thermal\_augmentation(recon)}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ aug\ =\ add\_grain(aug)}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ save\_image(aug,\ f\textcolor{stringliteral}{"{}\{output\_dir\}/\{name\}"{}})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00027}00027\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Combined\ augmentations\ saved\ to\ \{output\_dir\}"{}})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00029}00029\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00031}\mbox{\hyperlink{namespaceaugment__combined_a4bfdce6ea4e304ec69eb1f7599b849ea}{00031}}\ \ \ \ \ parser\ =\ argparse.ArgumentParser()}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00032}\mbox{\hyperlink{namespaceaugment__combined_a52017b2ee3daec6423084ca847fc4197}{00032}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/input\_dir"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00033}00033\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/output\_dir"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00034}00034\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/vqvae\_ckpt"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00035}\mbox{\hyperlink{namespaceaugment__combined_a2de380cc2ea2c91ff38b49f812c24239}{00035}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/config"{}},\ type=str,\ default=\textcolor{stringliteral}{"{}configs/default.yaml"{}})}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00036}\mbox{\hyperlink{namespaceaugment__combined_a5be3e3729cecbd30284a8757888b95d5}{00036}}\ \ \ \ \ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{augment__combined_8py_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{namespacemain}{main}}(args.input\_dir,\ args.output\_dir,\ args.vqvae\_ckpt,\ args.config)}
+
+\end{DoxyCode}

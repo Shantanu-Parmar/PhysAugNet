@@ -1,0 +1,198 @@
+\doxysection{augment\+\_\+combined Namespace Reference}
+\hypertarget{namespaceaugment__combined}{}\label{namespaceaugment__combined}\index{augment\_combined@{augment\_combined}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a0d4a622e476060c22a9defd64c1b55f5}{main}} (input\+\_\+dir, output\+\_\+dir, checkpoint, config\+\_\+path="{}configs/default.\+yaml"{})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{load\+\_\+vqvae\+\_\+model}} (checkpoint\+\_\+path, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569}{augment\+\_\+images}} (\mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{model}}, input\+\_\+dir, output\+\_\+dir, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}}, apply\+\_\+grain)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a4bfdce6ea4e304ec69eb1f7599b849ea}{parser}} = argparse.\+Argument\+Parser()
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a52017b2ee3daec6423084ca847fc4197}{required}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a6e4a610d222a76338bb48b3aef784a60}{type}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a30f5a1c93fcfb656bbba39876b391dd5}{str}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a2de380cc2ea2c91ff38b49f812c24239}{default}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a5be3e3729cecbd30284a8757888b95d5}{args}} = parser.\+parse\+\_\+args()
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a7e0f809840ec90fc4a4fc35d2a2d4495}{True}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_ac44622bc10976304c0946f7c196b9746}{help}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a4d8b44b5f7945c9a4f900d0ce9f0160e}{action}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a264135104702ee475ed51920e6663e7a}{logger}} = get\+\_\+logger("{}augment\+\_\+combined"{})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}} = torch.\+device(args.\+device if torch.\+cuda.\+is\+\_\+available() else \textquotesingle{}cpu\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{model}} = \mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{load\+\_\+vqvae\+\_\+model}}(args.\+vqvae\+\_\+ckpt, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}})
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespaceaugment__combined_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569}\index{augment\_combined@{augment\_combined}!augment\_images@{augment\_images}}
+\index{augment\_images@{augment\_images}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{augment\_images()}{augment\_images()}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569} 
+augment\+\_\+combined.\+augment\+\_\+images (\begin{DoxyParamCaption}\item[{}]{model}{, }\item[{}]{input\+\_\+dir}{, }\item[{}]{output\+\_\+dir}{, }\item[{}]{device}{, }\item[{}]{apply\+\_\+grain}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00024}{24}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}\index{augment\_combined@{augment\_combined}!load\_vqvae\_model@{load\_vqvae\_model}}
+\index{load\_vqvae\_model@{load\_vqvae\_model}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{load\_vqvae\_model()}{load\_vqvae\_model()}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd} 
+augment\+\_\+combined.\+load\+\_\+vqvae\+\_\+model (\begin{DoxyParamCaption}\item[{}]{checkpoint\+\_\+path}{, }\item[{}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00016}{16}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a0d4a622e476060c22a9defd64c1b55f5}\index{augment\_combined@{augment\_combined}!main@{main}}
+\index{main@{main}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a0d4a622e476060c22a9defd64c1b55f5} 
+augment\+\_\+combined.\+main (\begin{DoxyParamCaption}\item[{}]{input\+\_\+dir}{, }\item[{}]{output\+\_\+dir}{, }\item[{}]{checkpoint}{, }\item[{}]{config\+\_\+path}{ = {\ttfamily "{}configs/default.yaml"{}}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00010}{10}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{namespaceaugment__combined_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceaugment__combined_a4d8b44b5f7945c9a4f900d0ce9f0160e}\index{augment\_combined@{augment\_combined}!action@{action}}
+\index{action@{action}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{action}{action}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a4d8b44b5f7945c9a4f900d0ce9f0160e} 
+augment\+\_\+combined.\+action}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00056}{56}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a5be3e3729cecbd30284a8757888b95d5}\index{augment\_combined@{augment\_combined}!args@{args}}
+\index{args@{args}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a5be3e3729cecbd30284a8757888b95d5} 
+augment\+\_\+combined.\+args = parser.\+parse\+\_\+args()}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00036}{36}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a2de380cc2ea2c91ff38b49f812c24239}\index{augment\_combined@{augment\_combined}!default@{default}}
+\index{default@{default}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{default}{default}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a2de380cc2ea2c91ff38b49f812c24239} 
+augment\+\_\+combined.\+default}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00035}{35}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}\index{augment\_combined@{augment\_combined}!device@{device}}
+\index{device@{device}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{device}{device}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a} 
+augment\+\_\+combined.\+device = torch.\+device(args.\+device if torch.\+cuda.\+is\+\_\+available() else \textquotesingle{}cpu\textquotesingle{})}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00063}{63}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_ac44622bc10976304c0946f7c196b9746}\index{augment\_combined@{augment\_combined}!help@{help}}
+\index{help@{help}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{help}{help}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_ac44622bc10976304c0946f7c196b9746} 
+augment\+\_\+combined.\+help}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00052}{52}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a264135104702ee475ed51920e6663e7a}\index{augment\_combined@{augment\_combined}!logger@{logger}}
+\index{logger@{logger}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a264135104702ee475ed51920e6663e7a} 
+augment\+\_\+combined.\+logger = get\+\_\+logger("{}augment\+\_\+combined"{})}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00059}{59}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}\index{augment\_combined@{augment\_combined}!model@{model}}
+\index{model@{model}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817} 
+augment\+\_\+combined.\+model = \mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{load\+\_\+vqvae\+\_\+model}}(args.\+vqvae\+\_\+ckpt, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}})}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00064}{64}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a4bfdce6ea4e304ec69eb1f7599b849ea}\index{augment\_combined@{augment\_combined}!parser@{parser}}
+\index{parser@{parser}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{parser}{parser}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a4bfdce6ea4e304ec69eb1f7599b849ea} 
+augment\+\_\+combined.\+parser = argparse.\+Argument\+Parser()}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00031}{31}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a52017b2ee3daec6423084ca847fc4197}\index{augment\_combined@{augment\_combined}!required@{required}}
+\index{required@{required}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{required}{required}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a52017b2ee3daec6423084ca847fc4197} 
+augment\+\_\+combined.\+required}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00032}{32}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a30f5a1c93fcfb656bbba39876b391dd5}\index{augment\_combined@{augment\_combined}!str@{str}}
+\index{str@{str}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{str}{str}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a30f5a1c93fcfb656bbba39876b391dd5} 
+augment\+\_\+combined.\+str}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00035}{35}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a7e0f809840ec90fc4a4fc35d2a2d4495}\index{augment\_combined@{augment\_combined}!True@{True}}
+\index{True@{True}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{True}{True}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a7e0f809840ec90fc4a4fc35d2a2d4495} 
+augment\+\_\+combined.\+True}
+
+
+
+Definition at line \mbox{\hyperlink{scripts_2augment__combined_8py_source_l00052}{52}} of file \mbox{\hyperlink{scripts_2augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+
+\Hypertarget{namespaceaugment__combined_a6e4a610d222a76338bb48b3aef784a60}\index{augment\_combined@{augment\_combined}!type@{type}}
+\index{type@{type}!augment\_combined@{augment\_combined}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{namespaceaugment__combined_a6e4a610d222a76338bb48b3aef784a60} 
+augment\+\_\+combined.\+type}
+
+
+
+Definition at line \mbox{\hyperlink{augment__combined_8py_source_l00035}{35}} of file \mbox{\hyperlink{augment__combined_8py_source}{augment\+\_\+combined.\+py}}.
+

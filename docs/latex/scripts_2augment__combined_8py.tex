@@ -1,0 +1,29 @@
+\doxysection{scripts/augment\+\_\+combined.py File Reference}
+\hypertarget{scripts_2augment__combined_8py}{}\label{scripts_2augment__combined_8py}\index{scripts/augment\_combined.py@{scripts/augment\_combined.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceaugment__combined}{augment\+\_\+combined}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{augment\+\_\+combined.\+load\+\_\+vqvae\+\_\+model}} (checkpoint\+\_\+path, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569}{augment\+\_\+combined.\+augment\+\_\+images}} (\mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{model}}, input\+\_\+dir, output\+\_\+dir, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}}, apply\+\_\+grain)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a7e0f809840ec90fc4a4fc35d2a2d4495}{augment\+\_\+combined.\+True}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_ac44622bc10976304c0946f7c196b9746}{augment\+\_\+combined.\+help}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a4d8b44b5f7945c9a4f900d0ce9f0160e}{augment\+\_\+combined.\+action}}
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a264135104702ee475ed51920e6663e7a}{augment\+\_\+combined.\+logger}} = get\+\_\+logger("{}augment\+\_\+combined"{})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{augment\+\_\+combined.\+device}} = torch.\+device(args.\+device if torch.\+cuda.\+is\+\_\+available() else \textquotesingle{}cpu\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{augment\+\_\+combined.\+model}} = \mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{load\+\_\+vqvae\+\_\+model}}(args.\+vqvae\+\_\+ckpt, \mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{device}})
+\end{DoxyCompactItemize}

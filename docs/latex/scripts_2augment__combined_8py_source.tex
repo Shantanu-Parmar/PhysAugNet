@@ -1,0 +1,74 @@
+\doxysection{augment\+\_\+combined.\+py}
+\hypertarget{scripts_2augment__combined_8py_source}{}\label{scripts_2augment__combined_8py_source}\index{scripts/augment\_combined.py@{scripts/augment\_combined.py}}
+\mbox{\hyperlink{scripts_2augment__combined_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00001}00001\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00002}00002\ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00003}00003\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00004}00004\ \textcolor{keyword}{from}\ torchvision.utils\ \textcolor{keyword}{import}\ save\_image}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00005}00005\ \textcolor{keyword}{from}\ torchvision\ \textcolor{keyword}{import}\ transforms}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00006}00006\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ Image}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00007}00007\ \textcolor{keyword}{from}\ tqdm\ \textcolor{keyword}{import}\ tqdm}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00009}00009\ \textcolor{keyword}{from}\ physaug.vqvae.vqvae\ \textcolor{keyword}{import}\ VQVAE}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00010}00010\ \textcolor{keyword}{from}\ physaug.augment.thermal\ \textcolor{keyword}{import}\ apply\_thermal\_augmentation}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00011}00011\ \textcolor{keyword}{from}\ physaug.augment.grain\ \textcolor{keyword}{import}\ apply\_grain\_noise}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00012}00012\ \textcolor{keyword}{from}\ physaug.utils.io\ \textcolor{keyword}{import}\ load\_images\_from\_folder}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00013}00013\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ get\_logger}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00016}\mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{00016}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{load\_vqvae\_model}}(checkpoint\_path,\ device):}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00017}00017\ \ \ \ \ model\ =\ VQVAE(img\_channels=3,\ hidden\_channels=128,\ embedding\_dim=64,\ num\_embeddings=512)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00018}00018\ \ \ \ \ model.load\_state\_dict(torch.load(checkpoint\_path,\ map\_location=device))}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00019}00019\ \ \ \ \ model.to(device)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00020}00020\ \ \ \ \ model.eval()}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ model}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00024}\mbox{\hyperlink{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569}{00024}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569}{augment\_images}}(model,\ input\_dir,\ output\_dir,\ device,\ apply\_grain):}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00025}00025\ \ \ \ \ os.makedirs(output\_dir,\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00026}00026\ \ \ \ \ transform\ =\ transforms.ToTensor()}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00027}00027\ \ \ \ \ image\_paths\ =\ load\_images\_from\_folder(input\_dir)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{for}\ img\_path\ \textcolor{keywordflow}{in}\ tqdm(image\_paths,\ desc=\textcolor{stringliteral}{"{}Processing\ VQ+Thermal(+Grain)"{}}):}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ img\_name\ =\ os.path.basename(img\_path)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ image\ =\ Image.open(img\_path).convert(\textcolor{stringliteral}{"{}RGB"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ tensor\ =\ transform(image).unsqueeze(0).to(device)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad():}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ recon,\ \_\ =\ \mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{model}}(tensor)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Remove\ batch}}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ recon\ =\ recon.squeeze(0).cpu().clamp(0,\ 1)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Apply\ thermal}}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ thermal\ =\ apply\_thermal\_augmentation(recon)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Apply\ optional\ grain}}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ apply\_grain:}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ thermal\ =\ apply\_grain\_noise(thermal)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ save\_image(thermal,\ os.path.join(output\_dir,\ img\_name))}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00050}00050\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{'\_\_main\_\_'}:}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00051}00051\ \ \ \ \ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{"{}VQ-\/VAE\ +\ Thermal\ +\ Grain\ Augmentation"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00052}\mbox{\hyperlink{namespaceaugment__combined_ac44622bc10976304c0946f7c196b9746}{00052}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{'-\/-\/input\_dir'},\ type=str,\ required=\textcolor{keyword}{True},\ help=\textcolor{stringliteral}{'Input\ folder'})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00053}00053\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{'-\/-\/output\_dir'},\ type=str,\ required=\textcolor{keyword}{True},\ help=\textcolor{stringliteral}{'Output\ folder'})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00054}00054\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{'-\/-\/vqvae\_ckpt'},\ type=str,\ required=\textcolor{keyword}{True},\ help=\textcolor{stringliteral}{'Path\ to\ trained\ VQ-\/VAE\ checkpoint'})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00055}00055\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{'-\/-\/device'},\ type=str,\ default=\textcolor{stringliteral}{'cuda'},\ help=\textcolor{stringliteral}{'cuda\ or\ cpu'})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00056}\mbox{\hyperlink{namespaceaugment__combined_a4d8b44b5f7945c9a4f900d0ce9f0160e}{00056}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{'-\/-\/apply\_grain'},\ action=\textcolor{stringliteral}{'store\_true'},\ help=\textcolor{stringliteral}{'Apply\ grain\ noise\ after\ thermal'})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00057}00057\ \ \ \ \ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00059}\mbox{\hyperlink{namespaceaugment__combined_a264135104702ee475ed51920e6663e7a}{00059}}\ \ \ \ \ logger\ =\ get\_logger(\textcolor{stringliteral}{"{}augment\_combined"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00060}00060\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Input:\ \{args.input\_dir\}"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00061}00061\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}VQ-\/VAE\ Checkpoint:\ \{args.vqvae\_ckpt\}"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00063}\mbox{\hyperlink{namespaceaugment__combined_a8565f7d425ba490ec443697876f1599a}{00063}}\ \ \ \ \ device\ =\ torch.device(args.device\ \textcolor{keywordflow}{if}\ torch.cuda.is\_available()\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{'cpu'})}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00064}\mbox{\hyperlink{namespaceaugment__combined_a4b006058a3deb3cd00dc095d2888e817}{00064}}\ \ \ \ \ model\ =\ \mbox{\hyperlink{namespaceaugment__combined_a9fa0e058c2e0d4e7046032de1994f3cd}{load\_vqvae\_model}}(args.vqvae\_ckpt,\ device)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00066}00066\ \ \ \ \ \mbox{\hyperlink{namespaceaugment__combined_a3695761c4864fc348400330f2f03a569}{augment\_images}}(model,\ args.input\_dir,\ args.output\_dir,\ device,\ args.apply\_grain)}
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{scripts_2augment__combined_8py_source_l00068}00068\ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}✅\ Combined\ augmentation\ completed."{}})}
+
+\end{DoxyCode}

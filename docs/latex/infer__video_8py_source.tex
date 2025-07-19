@@ -1,0 +1,59 @@
+\doxysection{infer\+\_\+video.\+py}
+\hypertarget{infer__video_8py_source}{}\label{infer__video_8py_source}\mbox{\hyperlink{infer__video_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00001}\mbox{\hyperlink{namespaceinfer__video}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00002}00002\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00003}00003\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00004}00004\ \textcolor{keyword}{from}\ torchvision\ \textcolor{keyword}{import}\ transforms}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00005}00005\ \textcolor{keyword}{from}\ torchvision.utils\ \textcolor{keyword}{import}\ save\_image}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00006}00006\ \textcolor{keyword}{from}\ physaug.vqvae.vqvae\ \textcolor{keyword}{import}\ VQVAE}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00007}00007\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ setup\_logger}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00008}00008\ \textcolor{keyword}{from}\ physaug.utils.config\ \textcolor{keyword}{import}\ load\_config}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00010}\mbox{\hyperlink{namespaceinfer__video_ad8aa8a4fb99bd07996be4093c6c797a0}{00010}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceinfer__video}{infer\_video}}(video\_path,\ output\_path,\ checkpoint,\ config\_path="{}configs/default.yaml"{}):}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00011}00011\ \ \ \ \ cfg\ =\ load\_config(config\_path)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00012}00012\ \ \ \ \ logger\ =\ setup\_logger(\textcolor{stringliteral}{"{}infer\_video"{}},\ cfg[\textcolor{stringliteral}{"{}log\_dir"{}}])}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00013}00013\ \ \ \ \ device\ =\ \textcolor{stringliteral}{"{}cuda"{}}\ \textcolor{keywordflow}{if}\ torch.cuda.is\_available()\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}cpu"{}}}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00014}00014\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00015}00015\ \ \ \ \ model\ =\ VQVAE().to(device)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00016}00016\ \ \ \ \ model.load\_state\_dict(torch.load(checkpoint,\ map\_location=device))}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00017}00017\ \ \ \ \ model.eval()}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00018}00018\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00019}00019\ \ \ \ \ transform\ =\ transforms.Compose([transforms.ToPILImage(),\ transforms.Resize(cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}]),\ transforms.ToTensor()])}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00020}00020\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00021}00021\ \ \ \ \ cap\ =\ cv2.VideoCapture(video\_path)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ cap.isOpened():}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Failed\ to\ open\ video:\ \{video\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00026}00026\ \ \ \ \ fps\ =\ cap.get(cv2.CAP\_PROP\_FPS)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00027}00027\ \ \ \ \ frame\_size\ =\ (cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}][1],\ cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}][0])}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00028}00028\ \ \ \ \ out\ =\ cv2.VideoWriter(output\_path,\ cv2.VideoWriter\_fourcc(*\textcolor{stringliteral}{"{}mp4v"{}}),\ fps,\ frame\_size)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00029}00029\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{while}\ cap.isOpened():}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ ret,\ frame\ =\ cap.read()}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ret:}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ frame\ =\ cv2.cvtColor(frame,\ cv2.COLOR\_BGR2RGB)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ tensor\ =\ transform(frame).unsqueeze(0).to(device)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad():}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ recon,\ \_,\ \_\ =\ model(tensor)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ recon\ =\ recon.squeeze(0).cpu().mul(255).byte().permute(1,\ 2,\ 0).numpy()}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ recon\ =\ cv2.cvtColor(recon,\ cv2.COLOR\_RGB2BGR)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ out.write(recon)}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00042}00042\ \ \ \ \ cap.release()}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00043}00043\ \ \ \ \ out.release()}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00044}00044\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Reconstructed\ video\ saved\ to\ \{output\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00046}00046\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00048}\mbox{\hyperlink{namespaceinfer__video_ae4f238a52a763897151fa969941b8e9e}{00048}}\ \ \ \ \ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{"{}Reconstruct\ video\ using\ VQ-\/VAE"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00049}\mbox{\hyperlink{namespaceinfer__video_a8318ae4a67fe1f8fda00189f3c23e154}{00049}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/video\_path"{}},\ required=\textcolor{keyword}{True},\ help=\textcolor{stringliteral}{"{}Input\ video\ file"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00050}00050\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/output\_path"{}},\ required=\textcolor{keyword}{True},\ help=\textcolor{stringliteral}{"{}Output\ video\ file"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00051}00051\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/checkpoint"{}},\ required=\textcolor{keyword}{True},\ help=\textcolor{stringliteral}{"{}Path\ to\ VQ-\/VAE\ checkpoint"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00052}\mbox{\hyperlink{namespaceinfer__video_a1b0d360aa4d8548f6c016b3b66c170b5}{00052}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/config"{}},\ type=str,\ default=\textcolor{stringliteral}{"{}configs/default.yaml"{}})}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00053}\mbox{\hyperlink{namespaceinfer__video_a8d788664ec95688093d50822a0c64479}{00053}}\ \ \ \ \ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{infer__video_8py_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{namespaceinfer__video}{infer\_video}}(args.video\_path,\ args.output\_path,\ args.checkpoint,\ args.config)}
+
+\end{DoxyCode}

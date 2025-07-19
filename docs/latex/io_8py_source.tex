@@ -1,0 +1,23 @@
+\doxysection{io.\+py}
+\hypertarget{io_8py_source}{}\label{io_8py_source}\index{physaug/utils/io.py@{physaug/utils/io.py}}
+\mbox{\hyperlink{io_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00001}\mbox{\hyperlink{namespaceio}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00002}00002\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ Image}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00003}00003\ \textcolor{keyword}{from}\ torchvision\ \textcolor{keyword}{import}\ transforms}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00004}00004\ \textcolor{keyword}{from}\ torchvision.utils\ \textcolor{keyword}{import}\ save\_image}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00006}\mbox{\hyperlink{namespaceio_af558787a3604c6584317ff63a357422e}{00006}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceio_af558787a3604c6584317ff63a357422e}{load\_image\_folder}}(folder,\ image\_size=(128,\ 128)):}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00007}00007\ \ \ \ \ transform\ =\ transforms.Compose([transforms.Resize(image\_size),\ transforms.ToTensor()])}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00008}00008\ \ \ \ \ images,\ names\ =\ [],\ []}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00009}00009\ \ \ \ \ \textcolor{keywordflow}{for}\ fname\ \textcolor{keywordflow}{in}\ os.listdir(folder):}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00010}00010\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ fname.lower().endswith((\textcolor{stringliteral}{'jpg'},\ \textcolor{stringliteral}{'png'},\ \textcolor{stringliteral}{'jpeg'})):}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ img\ =\ Image.open(f\textcolor{stringliteral}{"{}\{folder\}/\{fname\}"{}}).convert(\textcolor{stringliteral}{'RGB'})}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ images.append(transform(img))}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ names.append(fname)}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00014}00014\ \ \ \ \ \textcolor{keywordflow}{return}\ images,\ names}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00016}\mbox{\hyperlink{namespaceio_a65d5d8e7c16ae465e53262732bd10c96}{00016}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceio_a65d5d8e7c16ae465e53262732bd10c96}{save\_image}}(tensor,\ path):}
+\DoxyCodeLine{\Hypertarget{io_8py_source_l00017}00017\ \ \ \ \ \mbox{\hyperlink{namespaceio_a65d5d8e7c16ae465e53262732bd10c96}{save\_image}}(tensor.clamp(0,\ 1),\ path)}
+
+\end{DoxyCode}

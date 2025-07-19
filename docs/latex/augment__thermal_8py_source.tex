@@ -1,0 +1,29 @@
+\doxysection{augment\+\_\+thermal.\+py}
+\hypertarget{augment__thermal_8py_source}{}\label{augment__thermal_8py_source}\mbox{\hyperlink{augment__thermal_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00001}\mbox{\hyperlink{namespaceaugment__thermal}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00002}00002\ \textcolor{keyword}{from}\ physaug.augment.thermal\ \textcolor{keyword}{import}\ apply\_thermal\_augmentation}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00003}00003\ \textcolor{keyword}{from}\ physaug.utils.io\ \textcolor{keyword}{import}\ load\_image\_folder,\ save\_image}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00004}00004\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ setup\_logger}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00005}00005\ \textcolor{keyword}{from}\ physaug.utils.config\ \textcolor{keyword}{import}\ load\_config}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00007}\mbox{\hyperlink{namespaceaugment__thermal_aaf0ec93b5d388cc28a69aa18b1b6af0f}{00007}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceaugment__thermal_a7588574bb6f6265ade0c1cc3e694d99d}{main}}(input\_dir,\ output\_dir,\ config\_path="{}configs/default.yaml"{}):}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00008}00008\ \ \ \ \ cfg\ =\ load\_config(config\_path)}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00009}00009\ \ \ \ \ logger\ =\ setup\_logger(\textcolor{stringliteral}{"{}augment\_thermal"{}},\ cfg[\textcolor{stringliteral}{"{}log\_dir"{}}])}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00010}00010\ \ \ \ \ os.makedirs(output\_dir,\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00011}00011\ \ \ \ \ images,\ names\ =\ load\_image\_folder(input\_dir,\ cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}])}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00012}00012\ \ \ \ \ \textcolor{keywordflow}{for}\ img,\ name\ \textcolor{keywordflow}{in}\ zip(images,\ names):}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ aug\_img\ =\ apply\_thermal\_augmentation(img)}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00014}00014\ \ \ \ \ \ \ \ \ save\_image(aug\_img,\ f\textcolor{stringliteral}{"{}\{output\_dir\}/\{name\}"{}})}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00015}00015\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Thermal\ augmentations\ saved\ to\ \{output\_dir\}"{}})}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00017}00017\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00019}\mbox{\hyperlink{namespaceaugment__thermal_a8d7cdb74acee46c1824316961a063f76}{00019}}\ \ \ \ \ parser\ =\ argparse.ArgumentParser()}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00020}\mbox{\hyperlink{namespaceaugment__thermal_ab32c16ca678e95879383439180069431}{00020}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/input\_dir"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00021}00021\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/output\_dir"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00022}\mbox{\hyperlink{namespaceaugment__thermal_a38177c27ab64d288d0bd2b9fe2226995}{00022}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/config"{}},\ type=str,\ default=\textcolor{stringliteral}{"{}configs/default.yaml"{}})}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00023}\mbox{\hyperlink{namespaceaugment__thermal_a3be89aea0261ed6c8e95b56493c2082d}{00023}}\ \ \ \ \ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{augment__thermal_8py_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{namespacemain}{main}}(args.input\_dir,\ args.output\_dir,\ args.config)}
+
+\end{DoxyCode}

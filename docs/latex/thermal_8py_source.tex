@@ -1,0 +1,18 @@
+\doxysection{thermal.\+py}
+\hypertarget{thermal_8py_source}{}\label{thermal_8py_source}\index{physaug/augment/thermal.py@{physaug/augment/thermal.py}}
+\mbox{\hyperlink{thermal_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00001}\mbox{\hyperlink{namespacethermal}{00001}}\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ Image}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00002}00002\ \textcolor{keyword}{import}\ torchvision.transforms\ \textcolor{keyword}{as}\ T}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00003}00003\ \textcolor{keyword}{import}\ random}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00004}00004\ \textcolor{keyword}{from}\ torchvision.transforms\ \textcolor{keyword}{import}\ functional\ \textcolor{keyword}{as}\ TF}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00006}\mbox{\hyperlink{namespacethermal_a5cb58d598e310ecc175f945efb62ab79}{00006}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethermal_a5cb58d598e310ecc175f945efb62ab79}{apply\_thermal\_augmentation}}(image):}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00007}00007\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ isinstance(image,\ Image.Image):}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00008}00008\ \ \ \ \ \ \ \ \ image\ =\ TF.to\_pil\_image(image)}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00009}00009\ \ \ \ \ img\ =\ T.ColorJitter(contrast=(0.8,\ 1.2),\ hue=(-\/0.1,\ 0.1))(image)}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00010}00010\ \ \ \ \ \textcolor{keywordflow}{if}\ random.random()\ <\ 0.5:}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ img\ =\ img.filter(ImageFilter.GaussianBlur(radius=1.0))}
+\DoxyCodeLine{\Hypertarget{thermal_8py_source_l00012}00012\ \ \ \ \ \textcolor{keywordflow}{return}\ TF.to\_tensor(img)}
+
+\end{DoxyCode}

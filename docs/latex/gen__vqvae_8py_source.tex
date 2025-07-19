@@ -1,0 +1,25 @@
+\doxysection{gen\+\_\+vqvae.\+py}
+\hypertarget{gen__vqvae_8py_source}{}\label{gen__vqvae_8py_source}\mbox{\hyperlink{gen__vqvae_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00001}\mbox{\hyperlink{namespacegen__vqvae}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00002}00002\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00003}00003\ \textcolor{keyword}{from}\ physaug.vqvae.infer\ \textcolor{keyword}{import}\ reconstruct\_folder}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00004}00004\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ setup\_logger}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00006}\mbox{\hyperlink{namespacegen__vqvae_aee31680e9b09f7bfcdd34326e39bcba3}{00006}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegen__vqvae_ae597063f564841be9969081cdf9d2da8}{main}}(input\_dir,\ output\_dir,\ checkpoint,\ config\_path="{}configs/default.yaml"{}):}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00007}00007\ \ \ \ \ cfg\ =\ load\_config(config\_path)}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00008}00008\ \ \ \ \ logger\ =\ setup\_logger(\textcolor{stringliteral}{"{}gen\_vqvae"{}},\ cfg[\textcolor{stringliteral}{"{}log\_dir"{}}])}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00009}00009\ \ \ \ \ reconstruct\_folder(input\_dir,\ output\_dir,\ checkpoint,\ cfg[\textcolor{stringliteral}{"{}vqvae"{}}][\textcolor{stringliteral}{"{}image\_size"{}}])}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00010}00010\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Reconstructed\ images\ saved\ to\ \{output\_dir\}"{}})}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00012}00012\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00014}\mbox{\hyperlink{namespacegen__vqvae_acad962894a6e3d59f350b42e1391990f}{00014}}\ \ \ \ \ parser\ =\ argparse.ArgumentParser()}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00015}\mbox{\hyperlink{namespacegen__vqvae_aafa9437fa5f42eaff5759adfd3206d97}{00015}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/input\_dir"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00016}00016\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/output\_dir"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00017}00017\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/checkpoint"{}},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00018}\mbox{\hyperlink{namespacegen__vqvae_a35754dd18f1a404d0ea5640e5ed1603f}{00018}}\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/config"{}},\ type=str,\ default=\textcolor{stringliteral}{"{}configs/default.yaml"{}})}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00019}\mbox{\hyperlink{namespacegen__vqvae_a430892943468835191df356e28edaa59}{00019}}\ \ \ \ \ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{gen__vqvae_8py_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{namespacemain}{main}}(args.input\_dir,\ args.output\_dir,\ args.checkpoint,\ args.config)}
+
+\end{DoxyCode}

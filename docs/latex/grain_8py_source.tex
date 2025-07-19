@@ -1,0 +1,13 @@
+\doxysection{grain.\+py}
+\hypertarget{grain_8py_source}{}\label{grain_8py_source}\index{physaug/augment/grain.py@{physaug/augment/grain.py}}
+\mbox{\hyperlink{grain_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00001}\mbox{\hyperlink{namespacegrain}{00001}}\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00003}\mbox{\hyperlink{namespacegrain_a6dc97c0636f4eda35dc69467dd6ff40a}{00003}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegrain_a6dc97c0636f4eda35dc69467dd6ff40a}{add\_grain}}(image,\ intensity=0.05):}
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00004}00004\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ torch.is\_tensor(image):}
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00005}00005\ \ \ \ \ \ \ \ \ image\ =\ torch.tensor(image)}
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00006}00006\ \ \ \ \ noise\ =\ torch.randn\_like(image)\ *\ intensity}
+\DoxyCodeLine{\Hypertarget{grain_8py_source_l00007}00007\ \ \ \ \ \textcolor{keywordflow}{return}\ torch.clamp(image\ +\ noise,\ 0,\ 1)}
+
+\end{DoxyCode}

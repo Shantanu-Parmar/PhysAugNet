@@ -1,0 +1,47 @@
+\doxysection{vqvae.\+py}
+\hypertarget{vqvae_8py_source}{}\label{vqvae_8py_source}\index{physaug/vqvae/vqvae.py@{physaug/vqvae/vqvae.py}}
+\mbox{\hyperlink{vqvae_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00001}\mbox{\hyperlink{namespacevqvae}{00001}}\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00002}00002\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00003}00003\ \textcolor{keyword}{import}\ torch.nn.functional\ \textcolor{keyword}{as}\ F}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00005}\mbox{\hyperlink{classvqvae_1_1_vector_quantizer}{00005}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classvqvae_1_1_vector_quantizer}{VectorQuantizer}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00006}\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_a3b0f79bcc8d8f46a3c2a7a7f04e21e24}{00006}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_a3b0f79bcc8d8f46a3c2a7a7f04e21e24}{\_\_init\_\_}}(self,\ num\_embeddings=512,\ embedding\_dim=64,\ commitment\_cost=0.25):}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00007}00007\ \ \ \ \ \ \ \ \ super().\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_a3b0f79bcc8d8f46a3c2a7a7f04e21e24}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00008}\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_afa7bfe2abde82b0968036d5e78058926}{00008}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_afa7bfe2abde82b0968036d5e78058926}{embedding}}\ =\ nn.Embedding(num\_embeddings,\ embedding\_dim)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00009}00009\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_afa7bfe2abde82b0968036d5e78058926}{embedding}}.weight.data.uniform\_(-\/1/num\_embeddings,\ 1/num\_embeddings)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00010}\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_a2822a0c66e300287c1c7fd1d600764d2}{00010}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_a2822a0c66e300287c1c7fd1d600764d2}{commitment\_cost}}\ =\ commitment\_cost}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00012}\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_adda1a1f1042eb5386bd6fb59231c1c2f}{00012}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_adda1a1f1042eb5386bd6fb59231c1c2f}{forward}}(self,\ x):}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ flat\_x\ =\ x.permute(0,\ 2,\ 3,\ 1).reshape(-\/1,\ x.size(1))}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00014}00014\ \ \ \ \ \ \ \ \ distances\ =\ torch.cdist(flat\_x,\ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_afa7bfe2abde82b0968036d5e78058926}{embedding}}.weight)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00015}00015\ \ \ \ \ \ \ \ \ encoding\_indices\ =\ torch.argmin(distances,\ dim=1).unsqueeze(1)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00016}00016\ \ \ \ \ \ \ \ \ encodings\ =\ torch.zeros(encoding\_indices.size(0),\ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_afa7bfe2abde82b0968036d5e78058926}{embedding}}.num\_embeddings,\ device=x.device)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ encodings.scatter\_(1,\ encoding\_indices,\ 1)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ quantized\ =\ torch.matmul(encodings,\ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_afa7bfe2abde82b0968036d5e78058926}{embedding}}.weight).view(x.shape)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ loss\ =\ F.mse\_loss(quantized.detach(),\ x)\ *\ self.\mbox{\hyperlink{classvqvae_1_1_vector_quantizer_a2822a0c66e300287c1c7fd1d600764d2}{commitment\_cost}}\ +\ F.mse\_loss(quantized,\ x.detach())}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ quantized\ =\ x\ +\ (quantized\ -\/\ x).detach()}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ quantized,\ loss,\ encoding\_indices.view(x.shape[0],\ x.shape[2],\ x.shape[3])}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00023}\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e}{00023}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e}{VQVAE}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00024}\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a623fde1f1f2f2409471f00f9393c97c6}{00024}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a623fde1f1f2f2409471f00f9393c97c6}{\_\_init\_\_}}(self,\ in\_channels=3,\ embedding\_dim=64,\ num\_embeddings=512):}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ super().\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a623fde1f1f2f2409471f00f9393c97c6}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00026}\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a6c0a7fa2c335fca72c3b844915878d40}{00026}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a6c0a7fa2c335fca72c3b844915878d40}{encoder}}\ =\ nn.Sequential(}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(in\_channels,\ 32,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(32,\ embedding\_dim,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00030}\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a816fa768b2b0976b061af7bfc3fc7784}{00030}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a816fa768b2b0976b061af7bfc3fc7784}{vq}}\ =\ \mbox{\hyperlink{classvqvae_1_1_vector_quantizer}{VectorQuantizer}}(num\_embeddings,\ embedding\_dim)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00031}\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a9247b487e28cb00f3b81e988ad50ce13}{00031}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a9247b487e28cb00f3b81e988ad50ce13}{decoder}}\ =\ nn.Sequential(}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ nn.ConvTranspose2d(embedding\_dim,\ 64,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ nn.ConvTranspose2d(64,\ 32,\ 4,\ 2,\ 1),\ nn.ReLU(),}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(32,\ in\_channels,\ 3,\ 1,\ 1),\ nn.Sigmoid(),}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00037}\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a02f3f07879bd997140eee18906b6e36a}{00037}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a02f3f07879bd997140eee18906b6e36a}{forward}}(self,\ x):}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ z\ =\ self.\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a6c0a7fa2c335fca72c3b844915878d40}{encoder}}(x)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ quantized,\ vq\_loss,\ \_\ =\ self.\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a816fa768b2b0976b061af7bfc3fc7784}{vq}}(z)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ recon\ =\ self.\mbox{\hyperlink{classvqvae_1_1_v_q_v_a_e_a9247b487e28cb00f3b81e988ad50ce13}{decoder}}(quantized)}
+\DoxyCodeLine{\Hypertarget{vqvae_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ recon,\ vq\_loss,\ quantized}
+
+\end{DoxyCode}

@@ -1,0 +1,57 @@
+\doxysection{train\+\_\+vqvae.\+py}
+\hypertarget{scripts_2train__vqvae_8py_source}{}\label{scripts_2train__vqvae_8py_source}\index{scripts/train\_vqvae.py@{scripts/train\_vqvae.py}}
+\mbox{\hyperlink{scripts_2train__vqvae_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00001}\mbox{\hyperlink{namespacetrain__vqvae}{00001}}\ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00002}00002\ \textcolor{keyword}{import}\ yaml}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00003}00003\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00004}00004\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00005}00005\ \textcolor{keyword}{from}\ physaug.vqvae.train\ \textcolor{keyword}{import}\ VQVAETrainer}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00006}00006\ \textcolor{keyword}{from}\ physaug.vqvae.vqvae\ \textcolor{keyword}{import}\ VQVAE}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00007}00007\ \textcolor{keyword}{from}\ physaug.utils.logger\ \textcolor{keyword}{import}\ setup\_logging}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00008}00008\ \textcolor{keyword}{from}\ physaug.utils.config\ \textcolor{keyword}{import}\ load\_config}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00009}00009\ \textcolor{keyword}{from}\ physaug.utils.io\ \textcolor{keyword}{import}\ get\_dataloaders}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00012}\mbox{\hyperlink{namespacetrain__vqvae_a361bcfa48a1fc892098d7dbba2446ba4}{00012}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacetrain__vqvae_a361bcfa48a1fc892098d7dbba2446ba4}{parse\_args}}():}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00013}00013\ \ \ \ \ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{"{}Train\ VQ-\/VAE\ on\ metal\ defect\ images"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00015}00015\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/config"{}},\ type=str,\ help=\textcolor{stringliteral}{"{}Path\ to\ YAML\ config\ file"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00016}00016\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/resume"{}},\ type=str,\ default=\textcolor{keywordtype}{None},\ help=\textcolor{stringliteral}{"{}Path\ to\ checkpoint\ to\ resume\ from"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00017}00017\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/device"{}},\ type=str,\ default=\textcolor{stringliteral}{"{}cuda"{}}\ \textcolor{keywordflow}{if}\ torch.cuda.is\_available()\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}cpu"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{return}\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00022}\mbox{\hyperlink{namespacetrain__vqvae_a3502d9dc3c095e85e008caf0de66c2d7}{00022}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacetrain__vqvae_a3502d9dc3c095e85e008caf0de66c2d7}{main}}():}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00023}00023\ \ \ \ \ args\ =\ \mbox{\hyperlink{namespacetrain__vqvae_a361bcfa48a1fc892098d7dbba2446ba4}{parse\_args}}()}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00024}00024\ \ \ \ \ cfg\ =\ load\_config(args.config)}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00026}00026\ \ \ \ \ os.makedirs(cfg[\textcolor{stringliteral}{"{}log\_dir"{}}],\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00027}00027\ \ \ \ \ os.makedirs(cfg[\textcolor{stringliteral}{"{}ckpt\_dir"{}}],\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00029}00029\ \ \ \ \ logger,\ writer\ =\ setup\_logging(cfg)}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00030}00030\ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Starting\ VQ-\/VAE\ training"{}})}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00032}00032\ \ \ \ \ train\_loader,\ val\_loader\ =\ get\_dataloaders(cfg)}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00033}00033\ \ \ \ \ model\ =\ VQVAE(in\_channels=3\ \textcolor{keywordflow}{if}\ cfg[\textcolor{stringliteral}{"{}mode"{}}]\ ==\ \textcolor{stringliteral}{"{}rgb"{}}\ \textcolor{keywordflow}{else}\ 1)}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00034}00034\ \ \ \ \ model.to(args.device)}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00036}00036\ \ \ \ \ trainer\ =\ VQVAETrainer(}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ model=model,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ train\_loader=train\_loader,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ val\_loader=val\_loader,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ cfg=cfg,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ writer=writer,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ logger=logger,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ resume\_path=args.resume,}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ device=args.device}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00045}00045\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00047}00047\ \ \ \ \ trainer.train()}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00050}00050\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{scripts_2train__vqvae_8py_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{namespacemain}{main}}()}
+
+\end{DoxyCode}
