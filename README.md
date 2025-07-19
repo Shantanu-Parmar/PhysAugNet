@@ -214,7 +214,7 @@ If you use PhysAugNet in your research, please cite:
 
 ```bibtex
 @misc{parmar2025physaugnet,
-  author       = {Shantanu Parmar},
+  author       = {Shantanusinh Parmar},
   title        = {PhysAugNet: VQ-VAE and Physically-Inspired Augmentations for Metal Defect Segmentation},
   year         = {2025},
   howpublished = {\url{https://github.com/Shantanu-Parmar/PhysAugNet}},
@@ -228,4 +228,4 @@ If you use PhysAugNet in your research, please cite:
 
 **MIT License** — You are free to use, modify, and distribute this software with proper attribution.
 
-© 2025 Shantanu Parmar. All rights reserved.
+© 2025 Shantanusinh Parmar. All rights reserved.
