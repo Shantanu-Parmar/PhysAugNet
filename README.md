@@ -1,27 +1,27 @@
 
-# 🔧 PhysAugNet
+# PhysAugNet
 
 **PhysAugNet** is a research-grade Python toolkit designed to enhance **few-shot** or **low-data** industrial defect segmentation tasks by integrating:
 
-- 🌐 **Vector-Quantized Variational Autoencoding (VQ-VAE)** for **generative reconstructions**
-- 🔥 **Physically-inspired augmentations** including **thermal distortion** and **sensor grain noise**
+- **Vector-Quantized Variational Autoencoding (VQ-VAE)** for **generative reconstructions**
+- **Physically-inspired augmentations** including **thermal distortion** and **sensor grain noise**
 
 This augmentation pipeline improves generalization and robustness of deep segmentation models in **industrial inspection** workflows.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-- ✅ **Compact and efficient VQ-VAE** architecture with fast convergence  
-- ✅ Dual-mode augmentation: **thermal distortion** + **sensor grain noise**  
-- ✅ **PhysAugNet Fusion**: Combines VQ-VAE reconstructions with physics-inspired augmentations  
-- ✅ CLI-based experiment control via **YAML configuration**  
-- ✅ Fully **modular** and easy to plug into PyTorch pipelines  
-- ✅ Lightweight design tailored for **few-shot learning** and **resource-constrained environments**
+- **Compact and efficient VQ-VAE** architecture with fast convergence  
+- Dual-mode augmentation: **thermal distortion** + **sensor grain noise**  
+- **PhysAugNet Fusion**: Combines VQ-VAE reconstructions with physics-inspired augmentations  
+- CLI-based experiment control via **YAML configuration**  
+- Fully **modular** and easy to plug into PyTorch pipelines  
+- Lightweight design tailored for **few-shot learning** and **resource-constrained environments**
 
 ---
 
-## 🧩 Computational Pipeline
+## Computational Pipeline
 
 | Module                      | Operation       | Description                                                    |
 |----------------------------|------------------|----------------------------------------------------------------|
@@ -36,7 +36,7 @@ This augmentation pipeline improves generalization and robustness of deep segmen
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 PhysAugNet/
@@ -75,7 +75,7 @@ PhysAugNet/
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Option 1: Install from PyPI (Recommended)
 
@@ -113,9 +113,9 @@ python setup.py install
 
 ---
 
-## ⚙️ Setup
+## Setup
 
-### 📁 Dataset Preparation
+### Dataset Preparation
 
 - Place **training images** under:  
   `images/train/<class_name>/`
@@ -123,47 +123,47 @@ python setup.py install
 - Place **test images** under:  
   `images/test/`
 
-### 📁 Directory Creation
+### Directory Creation
 
 ```bash
 mkdir -p checkpoints/vqvae outputs/reconstructed outputs/augmented outputs/combined logs
 ```
 
-### 🛠 Config File
+### Config File
 
 Edit `configs/default.yaml` to ensure all paths and parameters are correctly set for your environment.
 
 ---
 
-## 🖥 Usage
+## Usage
 
 Run from the root `PhysAugNet/` directory using CLI:
 
-### 🔧 VQ-VAE Training
+### VQ-VAE Training
 
 ```bash
 python -m physaug.main train_vqvae --config configs/default.yaml
 ```
 
-### 🧠 Image Reconstruction (VQ-VAE)
+### Image Reconstruction (VQ-VAE)
 
 ```bash
 python -m physaug.main reconstruct --config configs/default.yaml
 ```
 
-### 🌡 Thermal + Grain Augmentation
+### Thermal + Grain Augmentation
 
 ```bash
 python -m physaug.main augment_tg --config configs/default.yaml
 ```
 
-### 🔁 Combined VQ-VAE + Physical Augmentations
+### Combined VQ-VAE + Physical Augmentations
 
 ```bash
 python -m physaug.main augment_combined --config configs/default.yaml
 ```
 
-### 🎞 Video Frame Reconstruction (VQ-VAE)
+### Video Frame Reconstruction (VQ-VAE)
 
 ```bash
 python infer_video.py   --video_path images/DEMO_INFERENCE.mp4   --output_path outputs/reconstructed_video.mp4   --checkpoint checkpoints/vqvae.pth   --config configs/default.yaml
@@ -171,7 +171,7 @@ python infer_video.py   --video_path images/DEMO_INFERENCE.mp4   --output_path o
 
 ---
 
-## 📓 Notebook Demonstration
+## Notebook Demonstration
 
 Open the demo notebook to:
 
@@ -186,7 +186,7 @@ jupyter notebook examples/notebook_demo.ipynb
 
 ---
 
-## 📤 Output Structure
+## Output Structure
 
 | Type                | Path                        |
 |---------------------|-----------------------------|
@@ -199,7 +199,7 @@ jupyter notebook examples/notebook_demo.ipynb
 
 ---
 
-## 🧪 Applications
+## Applications
 
 - Few-shot segmentation in manufacturing
 - Synthetic data generation for metal defect detection
@@ -208,7 +208,7 @@ jupyter notebook examples/notebook_demo.ipynb
 
 ---
 
-## 📚 Citation
+## Citation
 
 If you use PhysAugNet in your research, please cite:
 
@@ -224,7 +224,7 @@ If you use PhysAugNet in your research, please cite:
 
 ---
 
-## 📄 License
+## License
 
 **MIT License** — You are free to use, modify, and distribute this software with proper attribution.
 
